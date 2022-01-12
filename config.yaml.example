@@ -1,0 +1,10 @@
+server:
+  port: 9090
+mysql:
+  address: 127.0.0.1
+  port: 3306
+  username: root
+  password: password
+redis:
+  address: 127.0.0.1
+  port: 3679
