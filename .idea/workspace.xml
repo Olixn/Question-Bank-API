@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d19f4969-a497-4bc7-afd1-3299a4d6473f" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/route/route.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/utils/utils.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/controller.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notice.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route/route.go" beforeDir="false" afterPath="$PROJECT_DIR$/route/route.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

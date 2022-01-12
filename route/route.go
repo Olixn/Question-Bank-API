@@ -9,6 +9,7 @@
 package route
 
 import (
+	"github.com/Olixn/Question-Bank-API/controller"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -17,4 +18,6 @@ func Init(r *gin.Engine) {
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, nil)
 	})
+
+	r.GET("/api/v1/cx/notice", controller.GetCxNotice)
 }
