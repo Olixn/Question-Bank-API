@@ -1,10 +1,14 @@
 server:
   port: 9090
 mysql:
-  address: 127.0.0.1
+  address:
   port: 3306
-  username: root
-  password: password
+  dbname:
+  username:
+  password:
 redis:
   address: 127.0.0.1
-  port: 3679
+  port: 6379
+  maxIdle: 8
+  maxActive: 0
+  idleTimeout: 100

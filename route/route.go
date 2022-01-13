@@ -10,14 +10,21 @@ package route
 
 import (
 	"github.com/Olixn/Question-Bank-API/controller"
+	"github.com/Olixn/Question-Bank-API/middleware"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
 func Init(r *gin.Engine) {
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusNotFound, nil)
+		c.Redirect(http.StatusMovedPermanently, "https://script.521daigua.cn")
 	})
 
-	r.GET("/api/v1/cx/notice", controller.GetCxNotice)
+	apiGroup := r.Group("/v1")
+	apiGroup.Use(middleware.StartTime())
+	{
+		apiGroup.GET("/api/notice", controller.GetNotice)
+		apiGroup.GET("/api/answer", controller.GetAnswer)
+	}
+
 }

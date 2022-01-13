@@ -10,22 +10,26 @@ package main
 
 import (
 	"github.com/Olixn/Question-Bank-API/config"
+	"github.com/Olixn/Question-Bank-API/controller"
+	"github.com/Olixn/Question-Bank-API/database"
 	"github.com/Olixn/Question-Bank-API/route"
 	"github.com/gin-gonic/gin"
 )
 
-var Config *config.Config
-
 func init() {
-	Config, _ = config.Init("config.yaml")
+	config.Init("config.yaml")
+	database.InitMySql()
+	database.InitRedisPool()
+	controller.InitTopicDao()
 }
 
 func main() {
+	var AppConfig = config.AppConfig
 	r := gin.Default()
 
 	// 初始化路由
 	route.Init(r)
 
-	r.Run(":" + Config.Server.Port)
+	r.Run(":" + AppConfig.Server.Port)
 
 }

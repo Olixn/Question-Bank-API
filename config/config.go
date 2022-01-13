@@ -17,6 +17,8 @@ import (
 	"log"
 )
 
+var AppConfig *Config
+
 type Config struct {
 	Server *Server
 	MySql  *MySql
@@ -30,29 +32,30 @@ type Server struct {
 type MySql struct {
 	Address  string `yaml:"address"`
 	Port     string `yaml:"port"`
-	UserName string `yaml:"userName"`
-	PassWord string `yaml:"passWord"`
+	Dbname   string `yaml:"dbname"`
+	UserName string `yaml:"username"`
+	PassWord string `yaml:"password"`
 }
 
 type Redis struct {
-	Address string `yaml:"address"`
-	Port    string `yaml:"port"`
+	Address     string `yaml:"address"`
+	Port        string `yaml:"port"`
+	MaxIdle     int    `yaml:"maxIdle"`
+	MaxActive   int    `yaml:"maxActive"`
+	IdleTimeout int    `yaml:"idleTimeout"`
 }
 
-func Init(filename string) (config *Config, err error) {
-	config = &Config{}
+func Init(filename string) {
+	AppConfig = &Config{}
 	content, err := ioutil.ReadFile(filename)
 	if err != nil {
 		err = errors.New(common.CONFIG_INIT_ERROR)
 		log.Fatalf("解析config.yaml读取错误: %v", err)
-		return
 	}
 
 	fmt.Println(string(content))
-	if yaml.Unmarshal(content, &config) != nil {
+	if yaml.Unmarshal(content, &AppConfig) != nil {
 		err = errors.New(common.CONFIG_INIT_ERROR)
 		log.Fatalf("解析config.yaml出错: %v", err)
-		return
 	}
-	return
 }
