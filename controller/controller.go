@@ -52,7 +52,7 @@ func GetAnswer(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusOK, model.Response{
 			Status: 0,
-			Msg:    err.Error(),
+			Msg:    common.ANSWER_NOT_FOUND,
 		})
 		return
 	}

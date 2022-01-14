@@ -11,4 +11,5 @@ package common
 const (
 	CONFIG_INIT_ERROR   = "配置文件读取失败"
 	POST_QUESTION_EMPTY = "传入问题为空！"
+	ANSWER_NOT_FOUND    = "暂无答案"
 )

@@ -11,6 +11,7 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gomodule/redigo/redis"
 	"io/ioutil"
 	"os"
 )
@@ -30,4 +31,12 @@ func ReadJSONFile(filepath string) (jsonData map[string]interface{}) {
 	}
 	jsonData = v.(map[string]interface{})
 	return
+}
+
+func Store2Redis(conn redis.Conn, h string, answer string) {
+	_, err := conn.Do("Set", h, answer)
+	if err != nil {
+		fmt.Println("Store2Redis Err = ", err)
+		return
+	}
 }

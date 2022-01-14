@@ -3,7 +3,7 @@ server:
 mysql:
   address:
   port: 3306
-  dbname:
+  dbname: 
   username:
   password:
 redis:
