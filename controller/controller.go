@@ -24,10 +24,15 @@ func InitTopicDao() {
 	var AppKvDbPool = database.AppKvDbPool
 	var AppDb = database.AppDb
 
+	var TopicChan = make(chan map[int]*model.Topic, 100)
+
 	topicDao = &model.TopicDao{
-		KvDbPool: AppKvDbPool,
-		Db:       AppDb,
+		KvDbPool:  AppKvDbPool,
+		Db:        AppDb,
+		TopicChan: TopicChan,
 	}
+
+	go topicDao.Write2Db()
 }
 
 func GetNotice(c *gin.Context) {
@@ -67,5 +72,43 @@ func GetAnswer(c *gin.Context) {
 		Msg:    "ok",
 		Data:   resData,
 	})
+
+}
+
+func Update(c *gin.Context) {
+	var question = c.PostForm("q")
+	var answer = c.PostForm("a")
+	var ip = c.ClientIP()
+
+	if question == "" && answer == "" {
+		c.JSON(http.StatusOK, model.Response{
+			Status: 0,
+			Msg:    common.POST_QUESTION_EMPTY,
+		})
+		return
+	}
+
+	var topic model.Topic
+	topic.Question = question
+	topic.Answer = answer
+	topic.Ip = ip
+	topic.Hash = utils.MD5(question)
+	opType, _ := topicDao.SetAndUpdate(&topic)
+	if opType == 1 {
+		c.JSON(http.StatusOK, model.Response{
+			Status: 1,
+			Msg:    common.QUESTION_ADD,
+		})
+	} else if opType == 0 {
+		c.JSON(http.StatusOK, model.Response{
+			Status: 1,
+			Msg:    common.QUESTION_UPDATE,
+		})
+	} else {
+		c.JSON(http.StatusOK, model.Response{
+			Status: 0,
+			Msg:    common.UNKONW_ERROR,
+		})
+	}
 
 }

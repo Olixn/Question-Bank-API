@@ -25,6 +25,7 @@ func Init(r *gin.Engine) {
 	{
 		apiGroup.GET("/api/notice", controller.GetNotice)
 		apiGroup.GET("/api/answer", controller.GetAnswer)
+		apiGroup.POST("/api/update", controller.Update)
 	}
 
 }
