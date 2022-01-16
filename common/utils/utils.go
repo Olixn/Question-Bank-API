@@ -34,7 +34,7 @@ func ReadJSONFile(filepath string) (jsonData map[string]interface{}) {
 }
 
 func Store2Redis(conn redis.Conn, h string, answer string) {
-	_, err := conn.Do("Set", h, answer)
+	_, err := conn.Do("SetEx", h, 3600, answer)
 	if err != nil {
 		fmt.Println("Store2Redis Err = ", err)
 		return

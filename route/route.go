@@ -22,6 +22,7 @@ func Init(r *gin.Engine) {
 
 	apiGroup := r.Group("/v1")
 	apiGroup.Use(middleware.StartTime())
+	apiGroup.Use(middleware.IPRestrict())
 	{
 		apiGroup.GET("/api/notice", controller.GetNotice)
 		apiGroup.GET("/api/answer", controller.GetAnswer)
