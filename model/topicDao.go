@@ -59,7 +59,7 @@ func (t *TopicDao) Write2Db() {
 		topicMap := <-t.TopicChan
 		for k, v := range topicMap {
 			if k == 0 {
-				t.Db.Model(&Topic{}).Updates(v)
+				t.Db.Model(&v).Updates(v)
 			} else {
 				t.Db.Model(&Topic{}).Create(v)
 			}
