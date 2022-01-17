@@ -30,6 +30,7 @@ func IPRestrict() gin.HandlerFunc {
 		ip := strings.Split(c.Request.RemoteAddr, ":")[0]
 		conn := AppKvDbPool.Get()
 		defer conn.Close()
+		defer conn.Do("Select", 0)
 		_, err := conn.Do("Select", 1)
 		if err != nil {
 			c.JSON(http.StatusOK, model.Response{
