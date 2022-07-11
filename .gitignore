@@ -6,4 +6,4 @@
 *.dylib
 *.test
 *.out
-config.yaml
+/server

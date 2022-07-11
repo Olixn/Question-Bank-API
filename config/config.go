@@ -58,4 +58,5 @@ func Init(filename string) {
 		err = errors.New(common.CONFIG_INIT_ERROR)
 		log.Fatalf("解析config.yaml出错: %v", err)
 	}
+
 }

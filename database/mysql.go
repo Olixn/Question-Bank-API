@@ -34,6 +34,7 @@ func InitMySql() {
 	if err != nil {
 		fmt.Println("数据库连接失败")
 		panic(err)
+
 	}
 
 	err = AppDb.AutoMigrate(&model.Topic{})
